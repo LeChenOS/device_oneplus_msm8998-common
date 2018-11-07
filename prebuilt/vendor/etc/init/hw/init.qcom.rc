@@ -37,7 +37,6 @@ on early-init
     chmod 0620 /dev/kmsg
 
 on init
-    export LD_SHIM_LIBS /system/lib/libcamera_client.so|libcamera_parameters_shim.so
     # Set permissions for persist partition
     mkdir /persist 0771 root system
 
@@ -468,6 +467,9 @@ on property:sys.boot_completed=1
     # WDSP FW boot sysfs node used by STHAL
     chown media audio /sys/kernel/wdsp0/boot
     chown media audio /sys/kernel/wcd_cpe0/fw_name
+
+    write /data/misc/camera/client_package_name "com.oneplus.camera"
+    chmod 0444 /data/misc/camera/client_package_name
 
     start vendor.qcom-post-boot
 
